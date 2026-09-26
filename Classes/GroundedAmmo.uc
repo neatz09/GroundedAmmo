@@ -128,7 +128,7 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 	AmmoPickup.SetCollision(false, false, false);
 	HitActor = AmmoPickup.Trace(HitLocation, HitNormal, EndTrace, StartTrace, true);
 	AmmoPickup.SetCollision(bCollideActors, bBlockActors, bBlockPlayers);
-	if (HitActor == None || (!HitActor.bWorldGeometry && Mover(HitActor) == None))
+	if (HitActor == None)
 	{
 		return;
 	}
