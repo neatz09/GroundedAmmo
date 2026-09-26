@@ -111,7 +111,7 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 		return;
 	}
 
-	StartTrace = AmmoPickup.Location + (vect(0,0,1) * AmmoPickup.CollisionHeight);
+	StartTrace = AmmoPickup.Location + (vect(0,0,1) * (AmmoPickup.CollisionHeight + 1.0));
 	EndTrace = AmmoPickup.Location - vect(0,0,4096);
 	HitActor = AmmoPickup.Trace(HitLocation, HitNormal, EndTrace, StartTrace);
 	if (HitActor == None)
@@ -119,7 +119,7 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 		return;
 	}
 
-	NewLocation = HitLocation + (vect(0,0,1) * AmmoPickup.CollisionHeight);
+	NewLocation = HitLocation + (vect(0,0,1) * (AmmoPickup.CollisionHeight + 1.0));
 	if (VSize(NewLocation - AmmoPickup.Location) < 1.0)
 	{
 		return;
