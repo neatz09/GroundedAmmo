@@ -108,14 +108,16 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 	local vector StartTrace;
 	local vector EndTrace;
 	local vector NewLocation;
+	local vector OriginalLocation;
 
 	if (AmmoPickup == None)
 	{
 		return;
 	}
 
-	StartTrace = AmmoPickup.Location + (vect(0,0,1) * (AmmoPickup.CollisionHeight + GroundTraceBuffer));
-	EndTrace = AmmoPickup.Location - (vect(0,0,1) * GroundTraceDistance);
+	OriginalLocation = AmmoPickup.Location;
+	StartTrace = OriginalLocation + (vect(0,0,1) * (AmmoPickup.CollisionHeight + GroundTraceBuffer));
+	EndTrace = StartTrace - (vect(0,0,1) * GroundTraceDistance);
 	HitActor = AmmoPickup.Trace(HitLocation, HitNormal, EndTrace, StartTrace, false);
 	if (HitActor == None)
 	{
@@ -123,14 +125,14 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 	}
 
 	NewLocation = HitLocation + (vect(0,0,1) * (AmmoPickup.CollisionHeight + GroundTraceBuffer));
-	if (VSize(NewLocation - AmmoPickup.Location) < GroundTraceBuffer)
+	if (VSize(NewLocation - OriginalLocation) < GroundTraceBuffer)
 	{
 		return;
 	}
 
 	if (!AmmoPickup.SetLocation(NewLocation))
 	{
-		Log("GroundedAmmo failed to move " $ AmmoPickup $ " to " $ NewLocation);
+		Log("GroundedAmmo failed to move " $ AmmoPickup $ " from " $ OriginalLocation $ " to " $ NewLocation);
 	}
 }
 
