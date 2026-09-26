@@ -91,7 +91,7 @@ function bool ShouldGroundAmmoPickup(class<AmmoPickup> AmmoPickupClass)
 
 	for (PickupClassIndex = 0; PickupClassIndex < StockAmmoPickupClasses.Length; ++PickupClassIndex)
 	{
-		if (ClassIsChildOf(AmmoPickupClass, StockAmmoPickupClasses[PickupClassIndex]))
+		if (AmmoPickupClass == StockAmmoPickupClasses[PickupClassIndex])
 		{
 			return true;
 		}
