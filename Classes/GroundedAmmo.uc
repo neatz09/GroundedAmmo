@@ -1,5 +1,8 @@
 class GroundedAmmo extends Mutator;
 
+const GroundTraceBuffer = 1.0;
+const GroundTraceDistance = 4096.0;
+
 var array<class<Weapon> > StockWeaponClasses;
 var transient array<class<AmmoPickup> > StockAmmoPickupClasses;
 
@@ -111,21 +114,24 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 		return;
 	}
 
-	StartTrace = AmmoPickup.Location + (vect(0,0,1) * (AmmoPickup.CollisionHeight + 1.0));
-	EndTrace = AmmoPickup.Location - vect(0,0,4096);
+	StartTrace = AmmoPickup.Location + (vect(0,0,1) * (AmmoPickup.CollisionHeight + GroundTraceBuffer));
+	EndTrace = AmmoPickup.Location - (vect(0,0,1) * GroundTraceDistance);
 	HitActor = AmmoPickup.Trace(HitLocation, HitNormal, EndTrace, StartTrace);
 	if (HitActor == None)
 	{
 		return;
 	}
 
-	NewLocation = HitLocation + (vect(0,0,1) * (AmmoPickup.CollisionHeight + 1.0));
-	if (VSize(NewLocation - AmmoPickup.Location) < 1.0)
+	NewLocation = HitLocation + (vect(0,0,1) * (AmmoPickup.CollisionHeight + GroundTraceBuffer));
+	if (VSize(NewLocation - AmmoPickup.Location) < GroundTraceBuffer)
 	{
 		return;
 	}
 
-	AmmoPickup.SetLocation(NewLocation);
+	if (!AmmoPickup.SetLocation(NewLocation))
+	{
+		Log("GroundedAmmo failed to move " $ AmmoPickup $ " to " $ NewLocation);
+	}
 }
 
 defaultproperties
