@@ -141,7 +141,11 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 
 	if (!AmmoPickup.SetLocation(NewLocation))
 	{
-		Log("GroundedAmmo failed to move " $ AmmoPickup $ " from " $ OriginalLocation $ " to " $ NewLocation);
+		NewLocation += vect(0,0,1) * GroundTraceBuffer;
+		if (!AmmoPickup.SetLocation(NewLocation))
+		{
+			Log("GroundedAmmo failed to move " $ AmmoPickup $ " from " $ OriginalLocation $ " to " $ NewLocation);
+		}
 	}
 }
 
