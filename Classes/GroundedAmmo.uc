@@ -126,7 +126,7 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 	bBlockActors = AmmoPickup.bBlockActors;
 	bBlockPlayers = AmmoPickup.bBlockPlayers;
 	AmmoPickup.SetCollision(false, false, false);
-	HitActor = AmmoPickup.Trace(HitLocation, HitNormal, EndTrace, StartTrace, false);
+	HitActor = AmmoPickup.Trace(HitLocation, HitNormal, EndTrace, StartTrace, true);
 	AmmoPickup.SetCollision(bCollideActors, bBlockActors, bBlockPlayers);
 	if (HitActor == None || (!HitActor.bWorldGeometry && Mover(HitActor) == None))
 	{
