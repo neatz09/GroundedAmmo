@@ -116,7 +116,7 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 
 	StartTrace = AmmoPickup.Location + (vect(0,0,1) * (AmmoPickup.CollisionHeight + GroundTraceBuffer));
 	EndTrace = AmmoPickup.Location - (vect(0,0,1) * GroundTraceDistance);
-	HitActor = AmmoPickup.Trace(HitLocation, HitNormal, EndTrace, StartTrace);
+	HitActor = AmmoPickup.Trace(HitLocation, HitNormal, EndTrace, StartTrace, false);
 	if (HitActor == None)
 	{
 		return;
