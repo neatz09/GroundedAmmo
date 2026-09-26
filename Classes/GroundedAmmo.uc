@@ -133,7 +133,7 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 		return;
 	}
 
-	NewLocation = HitLocation + (vect(0,0,1) * AmmoPickup.CollisionHeight);
+	NewLocation = HitLocation + (vect(0,0,1) * (AmmoPickup.CollisionHeight + AmmoPickup.PrePivot.Z));
 	if (VSize(NewLocation - OriginalLocation) < GroundTraceBuffer)
 	{
 		return;
