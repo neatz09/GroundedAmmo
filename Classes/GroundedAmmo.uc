@@ -125,7 +125,7 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 	bCollideActors = AmmoPickup.bCollideActors;
 	bBlockActors = AmmoPickup.bBlockActors;
 	bBlockPlayers = AmmoPickup.bBlockPlayers;
-	AmmoPickup.SetCollision(false, bBlockActors, bBlockPlayers);
+	AmmoPickup.SetCollision(false, false, false);
 	HitActor = AmmoPickup.Trace(HitLocation, HitNormal, EndTrace, StartTrace, false);
 	AmmoPickup.SetCollision(bCollideActors, bBlockActors, bBlockPlayers);
 	if (HitActor == None)
@@ -133,7 +133,7 @@ function GroundAmmoPickup(AmmoPickup AmmoPickup)
 		return;
 	}
 
-	NewLocation = HitLocation + (vect(0,0,1) * (AmmoPickup.CollisionHeight + GroundTraceBuffer));
+	NewLocation = HitLocation + (vect(0,0,1) * AmmoPickup.CollisionHeight);
 	if (VSize(NewLocation - OriginalLocation) < GroundTraceBuffer)
 	{
 		return;
